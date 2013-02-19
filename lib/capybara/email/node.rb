@@ -1,8 +1,10 @@
 class Capybara::Email::Node < Capybara::Driver::Node
-  def text
+  def all_text
     native.text
   end
-
+  alias :text :all_text
+  alias :visible_text :all_text
+  
   def [](name)
     string_node[name]
   end
@@ -23,9 +25,15 @@ class Capybara::Email::Node < Capybara::Driver::Node
     string_node.visible?
   end
 
-  def find(locator)
+  def find_xpath(locator)
     native.xpath(locator).map { |node| self.class.new(driver, node) }
   end
+  alias :find :find_xpath
+  
+  def find_css(locator)
+    native.css(locator).map {|node| self.class.new(driver,node) }
+  end
+  
 
   private
 
