@@ -53,10 +53,9 @@ class Capybara::Email::Driver < Capybara::Driver::Base
   # @param [xpath string]
   #
   # @return [Array<Capybara::Driver::Node>]
-  def find_xpath(selector)
+  def find(selector)
     dom.xpath(selector).map { |node| Capybara::Email::Node.new(self, node) }
   end
-  alias :find :find_xpath
   
   # Find elements based on given css
   #
