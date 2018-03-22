@@ -19,7 +19,8 @@ class Capybara::Email::Node < Capybara::Driver::Node
     Capybara::Helpers.normalize_whitespace(text)
   end
 
-  def click
+  def click(keys = [], options = {})
+    raise ArgumentError, "capybara-email doesn't support any click options" unless keys.empty? && options.empty?
     driver.follow(self[:href].to_s)
   end
 
